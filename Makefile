@@ -59,6 +59,15 @@ pkgconfig:
 	pkg-config --modversion cfitsio || (echo -e "\nWe require cfitsio but it was not found.\nGet it from http://heasarc.gsfc.nasa.gov/fitsio/\nOr on Ubuntu/Debian, apt-get install cfitsio-dev\nOr on Mac OS / Homebrew, brew install cfitsio\n" && false)
 .PHONY: pkgconfig
 
+# http://stackoverflow.com/questions/10327939/erroring-on-no-such-instruction-while-assembling-project-on-mac-os-x-lion
+subdirs: thirdparty
+	$(MAKE) -C util
+	$(MAKE) -C catalogs
+	$(MAKE) -C libkd
+	$(MAKE) -C blind
+
+thirdparty: qfits-an
+
 # Detect GSL -- this minimum version was chosen to match the version in gsl-an.
 # Earlier versions would probably work fine.
 SYSTEM_GSL ?= $(shell (pkg-config --atleast-version=1.14 gsl && echo "yes") || echo "no")

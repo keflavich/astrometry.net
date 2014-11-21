@@ -1,0 +1,7 @@
+Adam's build notes, November 21 2014:
+
+I had to use this SO post:
+http://stackoverflow.com/questions/10327939/erroring-on-no-such-instruction-while-assembling-project-on-mac-os-x-lion
+and in each individual subdirectory run
+CFLAGS='-Wa,-q' make -j 8
+in order to get things to build.  I couldn't run it in the parent directory
